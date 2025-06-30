@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>加入主畫面提示</title>
+  <link rel="manifest" href="manifest.json" />
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -43,39 +44,7 @@
 <script>
   const url = "https://reply.st-mary.org.tw/";
 
-  // iOS 簡易判斷
+  // iOS 判斷
   const isIos = () => {
     const userAgent = window.navigator.userAgent.toLowerCase();
-    return /iphone|ipad|ipod/.test(userAgent);
-  };
-
-  // 觸發安裝提示事件
-  let deferredPrompt;
-
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    document.getElementById('installPrompt').style.display = 'block';
-  });
-
-  document.getElementById('btnInstall').addEventListener('click', async () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const choiceResult = await deferredPrompt.userChoice;
-      if (choiceResult.outcome === 'accepted') {
-        console.log('User accepted the install prompt');
-      }
-      deferredPrompt = null;
-      document.getElementById('installPrompt').style.display = 'none';
-    }
-  });
-
-  document.getElementById('openLink').addEventListener('click', () => {
-    window.open(url, '_blank');
-    if (isIos()) {
-      document.getElementById('iosHint').style.display = 'block';
-    }
-  });
-</script>
-</body>
-</html>
+    return /iphone|ipad|i
